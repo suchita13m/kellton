@@ -1,0 +1,55 @@
+    <div class="row">
+        <div class="col-xs-9">
+            <span *ngIf="submitted" class="msg">{{ infoMessage }}</span>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-xs-9">
+            <p>Please fill in this form to create an account.</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-10">
+            <form name="userData" (ngSubmit)="onSubmit()" #f="ngForm" #userData="ngForm">
+                <div class="col-xs-8 form-group">
+                    <label for="firstname">First Name</label>
+                    <input type="text" id="firstname" name="firstname" #firstname="ngModel" minlength="5" class="form-control" ngModel required/>
+                    <span *ngIf="!firstname.valid && (firstname.touched || firstname.dirty)">
+                        <span class="help-block" *ngIf="firstname.errors.required">Please enter your firstname.</span>
+                        <span class="help-block" *ngIf="firstname.errors.minlength">Minimum 5 characters are required.</span>
+                    </span>
+                </div>
+                <div class="col-xs-8 form-group">
+                    <label for="lastname">Last Name</label>
+                    <input type="text" id="lastname" name="lastname" #lastname="ngModel" minlength="5" class="form-control" ngModel required/>
+                    <span *ngIf="!lastname.valid && (lastname.touched || lastname.dirty)">
+                        <span class="help-block" *ngIf="lastname.errors.required">Please enter your lastname.</span>
+                        <span class="help-block" *ngIf="lastname.errors.minlength">Minimum 5 characters are required.</span>
+                    </span>                
+                </div>
+                <div class="col-xs-5 form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="number" id="phone" name="phone" #phone="ngModel" [pattern]="mobNumberPattern" class="form-control" ngModel required/>
+                    <span *ngIf="!phone.valid && (phone.touched || phone.dirty)">
+                        <span class="help-block" *ngIf="phone.errors.required">Please enter a valid phone no.</span>
+                        <span class="help-block" *ngIf="phone.errors.pattern">Enter a 10 digit valid mobile number.</span>
+                    </span>
+                </div>
+                <div class="col-xs-5 form-group">
+                    <label for="country">Country</label>
+                    <select name="country" id="country" class="form-control" #country="ngModel" [ngModel]="defaultCountry" required>
+                        <option value="">Select Country</option>
+                        <option *ngFor="let country of countries" [value]="country">{{country}}</option>
+                    </select>
+                    <span *ngIf="!country.valid && country.touched">
+                        <span *ngIf="country.errors.required">Please select a country</span>
+                    </span>
+                </div>
+                <div class="col-xs-12">
+                    <button class="btn btn-primary" [disabled]="!userData.form.valid" type="submit">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+

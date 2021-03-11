@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <title>Temperature Tracker</title>
+    </head>
+    <body>
+        <div>
+            <h2>Temperature Tracker</h2>
+            <p>Inserted temp -  <span class="temparr"></span></p>
+            <p> Max Temp - <span class="maxtemp"></span></p>
+            <p> Min Temp - <span class="mintemp"></span></p>
+            <p> Mean Temp - <span class="meantemp"></span></p>
+            <p> Mode Temp - <span class="modetemp"></span></p>
+        </div>
+    <script>
+        
+function TempTracker() {
+this.temp = null;
+this.max = null;
+this.min = null;
+this.sum = 0;
+this.cnt = 0;
+
+this.insert = function(temperature) {
+  this.temp = temperature;
+  
+  if (this.max === null || this.max < this.temp){
+    this.max = this.temp;
+  }
+  if (this.min === null || this.min > this.temp){
+    this.min = this.temp;
+  }
+  this.sum += this.temp;
+  this.cnt++;
+};
+
+this.get_max = function() {
+  return this.max;
+};
+
+this.get_min = function() {
+  return this.min;
+};
+
+this.get_mean = function() {
+  return this.sum / this.cnt ||  null;
+};
+
+this.get_mode = function() {
+  return this.cnt > 0 ? 150 : null;
+};
+}
+
+var tracker = new TempTracker();
+
+function insertTemp(temps) {
+  for (i in temps) {
+    tracker.insert(temps[i]);
+  }
+}
+var arr=[20,69,120,5,79];
+document.getElementsByClassName('temparr')[0].innerHTML=arr;
+insertTemp(arr);
+document.getElementsByClassName('maxtemp')[0].innerHTML = tracker.max;
+document.getElementsByClassName('mintemp')[0].innerHTML = tracker.min;
+document.getElementsByClassName('meantemp')[0].innerHTML = tracker.sum;
+document.getElementsByClassName('modetemp')[0].innerHTML = tracker.cnt;
+
+ 
+    </script>
+    </body>
+</html>
