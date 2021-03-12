@@ -1,0 +1,22 @@
+Question1- User Registration Form
+
+Test Cases -
+
+1. Only characters are allowed in FirstName and Last Name column.
+2. Minimum 5 characters are required for firstname and last name.
+3. Phone number does not take characters as input.
+4. All fields are mandatory and submit button gets enabled once all validations are passed.
+5. Success message popups on submit.
+
+Question2- Anagram 
+
+Test Cases - 
+1) cellar, recall => returns true
+2) arm, elbow => returns false
+3) stressed, dessert => returns true
+4) below, elbow => returns true
+
+Question3- Temperature Tracker
+1) Enter temperature array of any range.
+2) Value in array should not be greater than 150 or smaller than 0.
+2) Get value of max, min,mean,mode of input temperature.

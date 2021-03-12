@@ -43,7 +43,7 @@ this.get_min = function() {
 };
 
 this.get_mean = function() {
-  return this.sum / this.cnt ||  null;
+  var mean = this.sum / this.cnt;
 };
 
 this.get_mode = function() {
@@ -55,15 +55,21 @@ var tracker = new TempTracker();
 
 function insertTemp(temps) {
   for (i in temps) {
+    var end=150;
+    var start=0;
+    for(var k = 0; k < temps.length; k++){
+        if (temps[k] > end || temps[k] < start){
+        return false;
+    }}
     tracker.insert(temps[i]);
   }
 }
-var arr=[20,69,120,5,79];
+var arr=[20,69,120,5,15,-2];
 document.getElementsByClassName('temparr')[0].innerHTML=arr;
 insertTemp(arr);
 document.getElementsByClassName('maxtemp')[0].innerHTML = tracker.max;
 document.getElementsByClassName('mintemp')[0].innerHTML = tracker.min;
-document.getElementsByClassName('meantemp')[0].innerHTML = tracker.sum;
+document.getElementsByClassName('meantemp')[0].innerHTML = (tracker.sum/tracker.cnt).toFixed(2);
 document.getElementsByClassName('modetemp')[0].innerHTML = tracker.cnt;
 
  
